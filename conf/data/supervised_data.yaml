@@ -1,0 +1,44 @@
+_target_: datasets.supervised_dataset.SLDataModule
+data_dirs: 
+####To be changed####
+# change the path to the path where you downloaded the dataset
+  - '/local_storage/datasets/sgerard/xview2/train'
+  - '/local_storage/datasets/sgerard/xview2/test'
+  - '/local_storage/datasets/sgerard/xview2/tier3'
+######################
+
+target_disasters: 
+  - 'hurricane-matthew'
+  - 'tuscaloosa-tornado'
+  - 'guatemala-volcano'
+  - 'sunda-tsunami'
+  - 'santa-rosa-wildfire'
+  
+legacy: True
+  
+labeled_transforms:
+   _target_: torchvision.transforms.Compose
+   transforms:
+    - _target_: torchvision.transforms.RandomHorizontalFlip
+      p: 0.5
+    - _target_: torchvision.transforms.RandomApply
+      p: 0.6
+      transforms:
+        - _target_: torchvision.transforms.RandomAffine
+          degrees: 
+            - -10
+            - 10 
+          scale: 
+            - 0.9
+            - 1.1
+          translate: 
+            - 0.1
+            - 0.1
+    - _target_: datasets.transforms.ResizeCrop
+      p: 0.2
+      input_size: 608
+      labeled: True
+labeled_batch_size: 8 # depends on the number of gpus if 2 gpus, the global batch size is 16
+num_workers: 6
+combine_loaders_mode: 'max_size_cycle'
+

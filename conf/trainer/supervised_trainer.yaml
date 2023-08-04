@@ -1,0 +1,15 @@
+_target_: lightning.pytorch.trainer.Trainer
+_partial_: True
+accelerator: "gpu"
+devices: 2 # to be overwritten by the cli
+strategy: "ddp"
+max_epochs: 30 #it is 40 in the paper but due to slightly different batch size, we need to reduce the number of epochs
+precision: '16-mixed'
+deterministic: True
+sync_batchnorm: True
+callbacks: 
+  - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    monitor: 'val_loss'
+    dirpath: '${model_dir}/checkpoints'
+    filename: ${name}-{epoch:02d}-{val_loss:.2f}
+default_root_dir: '${log_dir}' 

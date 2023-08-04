@@ -1,0 +1,72 @@
+_target_: modules.supervised.SLModule
+name: '${name}'
+model_dir: '${model_dir}'
+model:
+  _target_: legacy.zoo.models.Res34_Unet_Double
+  pretrained: True
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: True
+  lr: 0.0002
+  weight_decay: 1e-6
+scheduler:
+  _target_: torch.optim.lr_scheduler.MultiStepLR
+  _partial_: True
+  gamma: 0.5
+  milestones : 
+    - 5
+    - 11
+    - 17
+    - 23
+    - 29
+    - 33
+    - 47
+    - 50
+    - 60 
+    - 70
+    - 90
+    - 110
+    - 130
+    - 150
+    - 170
+    - 180
+    - 190
+    
+loss_fn:
+  _target_: legacy.losses.ComboLoss
+  weights:
+    dice: 1
+    focal: 1
+train_metric: 
+  _target_: torchmetrics.F1Score
+  num_labels: 5
+  average: 'micro'
+  threshold: 0.5
+  task: "multilabel"
+val_metric: 
+  _target_: torchmetrics.F1Score
+  num_labels: 5
+  average: 'micro'
+  threshold: 0.5
+  task: "multilabel"
+test_metric: 
+  _target_: torch.nn.ModuleList
+  modules:
+    - _target_: torchmetrics.F1Score
+      average: 'none'
+      task: "binary"
+    - _target_: torchmetrics.F1Score
+      average: 'none'
+      task: "binary"
+    - _target_: torchmetrics.F1Score
+      average: 'none'
+      task: "binary"
+    - _target_: torchmetrics.F1Score
+      average: 'none'
+      task: "binary"
+    - _target_: torchmetrics.F1Score
+      average: 'none'
+      task: "binary"
+
+
+

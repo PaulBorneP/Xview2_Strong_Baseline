@@ -1,0 +1,14 @@
+.idea/*
+weights/*
+__pycache__/*
+*/__pycache__/*
+pred*/*
+hold/*
+test/*
+*.out
+*.err
+wandb/*
+./ipynb_checkpoints/*
+*DS_Store
+.vscode
+.ipynb_checkpoints/*
