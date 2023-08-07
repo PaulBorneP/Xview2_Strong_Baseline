@@ -9,7 +9,7 @@ seed: 42
 ###To be changed###
 model_dir: '/local_storage/users/paulbp/xview2/ssl'
 ###################
-log_dir: '/Midgard/home/paulbp/xview2-replication/logs'
+log_dir: '/Midgard/home/paulbp/Xview2_Strong_Baseline/logs'
 group: 'xview2_supervised'
 name: '${group}_lr${network.optimizer.lr}_wd${network.optimizer.weight_decay}_bs${data.labeled_batch_size}_seed${seed}'
 

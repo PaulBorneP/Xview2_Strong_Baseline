@@ -229,7 +229,7 @@ if __name__ == "__main__":
     import numpy as np
 
     hydra.initialize(config_path="../conf")
-    cfg = hydra.compose(config_name="supervised_config")
+    cfg = hydra.compose(config_name="config")
     pl.seed_everything(cfg.seed)
     data_module = hydra.utils.instantiate(cfg.data)
     data_module.setup("fit")
@@ -237,7 +237,6 @@ if __name__ == "__main__":
     train_loader = data_module.train_dataloader()
     val_loader = data_module.val_dataloader()
     test_loader = data_module.test_dataloader()
-    print(len(data_module.train_dataset))
-    print(len(data_module.val_dataset))
-    print(len(data_module.test_dataset))
-    print(len(data_module.all_files))
+    for i in range(len(data_module.train_dataset)):
+        data = data_module.train_dataset[i]
+        print(data["img"].shape)

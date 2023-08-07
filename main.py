@@ -30,5 +30,5 @@ def main(cfg: DictConfig) -> pl.Trainer:
 
 if __name__ == "__main__":
     os.environ["HYDRA_FULL_ERROR"] = "1"
-    os.environ["WANDB_MODE"] ="disabled"
+    # os.environ["WANDB_MODE"] ="disabled"
     main()

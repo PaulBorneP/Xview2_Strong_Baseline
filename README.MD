@@ -34,14 +34,15 @@ This repo is organized to work using Pytorch Lightning and hydra :
     ...
 ```
 
-- main.py is the main file for the ssl experiments. It is used to launch the experiments. It uses the hydra and config.yaml file in ./conf to set the parameters of the experiments. main.py is meant to be launched with the m main_supervised.sbatch in ./sbatchs depending on the experiment you want to run (ssl or supervised baseline). Note that the supervised baseline is a rework of the ablated model using pytorch lightning.
-- ./datasets contains the dataset classes used in the experiments. The base_dataset.py is the base class for all the datasets. The supervised_dataset.py has the  the lightning datamodule class used for the supervised baseline. transforms.py contains the custom transforms used for the datasets.
-- ./modules contains the model classes. supervised.py contains the model for the strong baseline. It is based on the legacy resnet model defined in ./legacy/zoo/models.py.
-- ./sbatchs contains the sbatch files used to launch the experiments on the cluster.
-- ./conf contains the hydra config files used to set the parameters of the experiments.
-- ./legacy contains the code and results of the ablation study on the winning model. A separate README is available in ./legacy.
-- ./logs contains the logs of the experiments.
-- ./wip contains some work in progress code that was not used in the final experiments and can be ignored or deleted.
+- `main.py` is the main file for the ssl experiments. It is used to launch the experiments. It uses the hydra and config.yaml file in ./conf to set the parameters of the experiments. main.py is meant to be launched with the m main_supervised.sbatch in ./sbatchs depending on the experiment you want to run (ssl or supervised baseline). Note that the supervised baseline is a rework of the ablated model using pytorch lightning.
+- `./datasets` contains the dataset classes used in the experiments. The base_dataset.py is the base class for all the datasets. The supervised_dataset.py has the  the lightning datamodule class used for the supervised baseline. transforms.py contains the custom transforms used for the datasets.
+- `./modules` contains the model classes. supervised.py contains the model for the strong baseline. It is based on the legacy resnet model defined in ./legacy/zoo/models.py.
+- `./sbatchs` contains the sbatch files used to launch the experiments on the cluster.
+- `./conf` contains the hydra config files used to set the parameters of the experiments.
+- `./legacy` contains the code and results of the ablation study on the winning model. A separate README is available in ./legacy.
+- `./logs` contains the logs of the experiments.
+- `./wip` contains some work in progress code that was not used in the final experiments and can be ignored or deleted.
+
 
 # How to use
 ## Installation
@@ -60,12 +61,12 @@ The you will have to create the masks to be used during training as ground truth
 
 ```python ./legacy/create_masks.py```
 
-Finally be sure to modify the arguments marked as ####To be changed#### in the ./config files. `data.data_dirs` should be the 3 directories for which you just created masks. `model_dir` should be a location where you are comfortable with storing model weights and predictions
+Finally be sure to modify the arguments marked as ####To be changed#### in the `./config` files. `data.data_dirs` should be the 3 directories for which you just created masks. `model_dir` should be a location where you are comfortable with storing model weights and predictions
 
 
 ## Launching the experiments 
 
-This repo has been designed to be pretty straightforward to use once set up. Modify the config files in ./config to set the parameters of the experiments and launch it using the main.py file. The main.py file is meant to be launched using the sbatch files in ./sbatchs For example using the following command from thee root of the repo:
+This repo has been designed to be pretty straightforward to use once set up. Modify the config files in `./config` to set the parameters of the experiments and launch it using the main.py file. The main.py file is meant to be launched using the sbatch files in `./sbatchs` For example using the following command from thee root of the repo:
 
 ```sbatch ./sbatchs/main_supervised.sbatch ```
 
@@ -75,4 +76,4 @@ if your are using different hardware / cluster framework, consider modifying the
 
 the arguments from supervised_trainer.yaml can be overwritten using the command line. (see the sbatch file).
 
-Once the experiments are launched, you can monitor them using wandb. The results are saved in ./logs.
+Once the experiments are launched, you can monitor them using wandb. The results are saved in `./logs`.

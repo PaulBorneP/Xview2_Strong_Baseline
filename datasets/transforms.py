@@ -61,11 +61,10 @@ class ResizeCrop(torch.nn.Module):
             x0 = bst_x0
             y0 = bst_y0
             tensor = tensor[:, y0:y0 + crop_size, x0:x0 + crop_size]
-        if crop_size != self.input_size:
-            # Not to bilinear interpolation because it makes tensor values != 0 and 1
-            tensor = TF.resize(img=tensor,
-                               size=[self.input_size, self.input_size],
-                               interpolation=transforms.InterpolationMode.NEAREST,
-                               antialias=True)
+        # Not to bilinear interpolation because it makes tensor values != 0 and 1
+        tensor = TF.resize(img=tensor,
+                        size=[self.input_size, self.input_size],
+                        interpolation=transforms.InterpolationMode.NEAREST,
+                        antialias=True)
 
         return tensor

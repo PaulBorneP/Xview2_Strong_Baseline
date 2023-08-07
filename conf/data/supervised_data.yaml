@@ -15,7 +15,9 @@ target_disasters:
   - 'santa-rosa-wildfire'
   
 legacy: True
-  
+labeled_batch_size: 8 # depends on the number of gpus if 2 gpus, the global batch size is 16
+num_workers: 6
+combine_loaders_mode: 'max_size_cycle'
 labeled_transforms:
    _target_: torchvision.transforms.Compose
    transforms:
@@ -37,8 +39,4 @@ labeled_transforms:
     - _target_: datasets.transforms.ResizeCrop
       p: 0.2
       input_size: 608
-      labeled: True
-labeled_batch_size: 8 # depends on the number of gpus if 2 gpus, the global batch size is 16
-num_workers: 6
-combine_loaders_mode: 'max_size_cycle'
 

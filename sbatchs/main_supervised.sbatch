@@ -8,12 +8,11 @@
 #SBATCH --mail-user=paulbp@kth.se
 #SBATCH --output=/Midgard/home/paulbp/xview2-replication/logs/slurm/%j.out
 
-
 echo "Starting job ${SLURM_JOB_ID} on ${SLURMD_NODENAME}"
 nvidia-smi
 . ~/miniconda3/etc/profile.d/conda.sh
-# modify this to point to activate your environment
+# modify this to activate your environment
 conda activate xenv
-cd /Midgard/home/paulbp/xview2-replication/
+cd /Midgard/home/paulbp/Xview2_Strong_Baseline/
 
-srun python /Midgard/home/paulbp/xview2-replication/main.py --config-name supervised_config trainer.devices=2 data.num_workers=6 group="test_requirements"
+srun python /Midgard/home/paulbp/Xview2_Strong_Baseline/main.py  trainer.devices=2 data.num_workers=6 group="test"
