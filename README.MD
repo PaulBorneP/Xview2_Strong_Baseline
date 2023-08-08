@@ -53,6 +53,10 @@ we are using Python 3.8.2. For the required packages, see the requirements.txt f
 this might not work as your hardware might require another version of cuda but you can still read the requirements.txt file and install the packages you need manually. For our hardware we used the following command:
 
 ```pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 --upgrade```
+
+you might need to aditioanlly add the root of the repository to your python path using the following command:
+
+```export PYTHONPATH="${PYTHONPATH}:/path/to/your/repo"```
 ### Setting up the dataset
 
 The dataset is available on the [xView2 challenge website](https://xview2.org/). Be sure to download the train, test and tier3 sets.

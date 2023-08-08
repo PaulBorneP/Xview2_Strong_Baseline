@@ -6,7 +6,7 @@
 #SBATCH --constrain "khazadum"
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=paulbp@kth.se
-#SBATCH --output=/Midgard/home/paulbp/xview2-replication/logs/slurm/%j.out
+#SBATCH --output=/Midgard/home/paulbp/xview2-replication/logs/slurm/%j.out 
 
 echo "Starting job ${SLURM_JOB_ID} on ${SLURMD_NODENAME}"
 nvidia-smi
